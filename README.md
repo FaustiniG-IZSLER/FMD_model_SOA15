@@ -1,8 +1,14 @@
+# Foot-and-mouth disease modelling - EUPA&W Project
 
-# Dynamic Network-Based SEIR Model for FMD Spread and Depopulation Strategies
 
-## Description
-This repository contains the code for a **probabilistic SEIR transmission model** developed to simulate the spread of foot-and-mouth disease (FMD) among farms in one of Italy’s most livestock-dense regions. The model integrates a dynamic inter-farm contact network, where nodes represent farms and edges represent potentially infectious contacts based on distance, infectivity, and susceptibility.  
+## Repository Description
+This repository provides access to the Foot-and-Mouth Disease (FMD) models developed within the EUPA&W project.
+FMD models are available by tags or branches.
+
+---
+
+## Model description: Dynamic Network-Based SEIR Model for FMD Spread and Depopulation Strategies
+A **probabilistic SEIR transmission model** was developed to simulate the spread of foot-and-mouth disease (FMD) among farms in one of Italy’s most livestock-dense regions. The model integrates a dynamic inter-farm contact network, where nodes represent farms and edges represent potentially infectious contacts based on distance, infectivity, and susceptibility.  
 Instead of adopting a single static network, 1,000 alternative networks are generated for each simulation, and a SEIR framework is applied to model farm status transitions (Susceptible, Exposed, Infectious, Removed) on a daily time step.  
 
 The model was used to compare two preventive depopulation strategies:  
@@ -10,8 +16,6 @@ The model was used to compare two preventive depopulation strategies:
 - **Targeted removal of highly connected farms** identified by node degree in the contact network.  
 
 Simulations demonstrated that targeted depopulation outperforms random removal, reducing epidemic size and duration with fewer farms culled, especially under worst-case scenarios.
-
----
 
 ## Citation
 If you use this model in your work, please cite the following article:
