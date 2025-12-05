@@ -29,8 +29,8 @@ https://doi.org/10.3390/pathogens14090933
 Unless specified, the models are distributed under the **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC-BY-NC-SA 4.0) license**.
 You are free to share and adapt the material under the following terms:
 
-Attribution — You must give appropriate credit.
-NonCommercial — You may not use the material for commercial purposes.
-ShareAlike — If you remix, transform, or build upon the material, you must distribute your contributions under the same license.
+Attribution : You must give appropriate credit.
+NonCommercial : You may not use the material for commercial purposes.
+ShareAlike : If you remix, transform, or build upon the material, you must distribute your contributions under the same license.
 
 Full license text: https://creativecommons.org/licenses/by-nc-sa/4.0/
