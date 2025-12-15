@@ -47,7 +47,7 @@ for y in range(1000):
 # Infectivity and susceptibility parameters from: 
 # (Pesciaroli et al. 2025: https://doi.org/10.3390/ani15030386)
 # Infectivity parameters of the farms type
-# Farm included in the study n=3074. In case of a new dataset, use N = len(mydata)
+# Farm included in the study Bellini et al. 2025, n=3074. In case of a new dataset, use N = len(mydata)
     mydata['sus'] = numpy.random.beta(90,10, 3074)     # Large swine farms
     mydata['bos'] = numpy.random.beta(45,55, 3074)     # Large cattle farms
     mydata['susmall'] = numpy.random.beta(45,55, 3074) # Small swine farms
