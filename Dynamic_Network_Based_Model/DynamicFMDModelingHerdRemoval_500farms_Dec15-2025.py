@@ -3,8 +3,7 @@
 Spyder Editor
 
 """
-# 16 dic rimuovo 500 by degree  per riprodurre Bellini et al 2025 Suppl mat  
-# 15 dic real data per simulation da SubareaTIPOeCOORD2023 con UTM 32 LON LAT 
+
 # Codes for Bellini et al. 2025. Simulating the Spread of Foot-and-Mouth Disease 
 ## in Densely Populated Areas as Part of Contingency Plans to Establish the Best Control Options. 
 ## Pathogens 2025, 14, 933; https://doi.org/10.3390/pathogens14090933.
@@ -21,12 +20,12 @@ from scipy.spatial.distance import cdist   # SciPy library
 
 # Import database of farms with attributes and coordinates
 
-mydata = pd.read_csv("SubareaTIPOeCOORD2023.csv", header = 0)
+mydata = pd.read_csv("database.csv", header = 0)
 len(mydata)
-mydata.head()
+
 #Extract coordinates as a NumPy array
 
-coords = mydata[['CT_LONGITUDINE_UTM32', 'CT_LATITUDINE_UTM32']].to_numpy()
+coords = mydata[['X', 'Y']].to_numpy()
 
 # Compute the distance matrix
 
@@ -36,25 +35,25 @@ distance_matrix = cdist(coords, coords)
 
 def power_law_kernel(distances, k0, r0, alfa):
     return (k0 / (1 +  ((distances / 1000)/r0)**alfa))
-
 kernel_matrix = power_law_kernel(distance_matrix, 1, 2.500, 2.3)
 
 # Assign 0.0 to the diagonal
 
 numpy.fill_diagonal(kernel_matrix, 0.0)
 
-# 1000 simulatiions; results populate the outputtrends list
+# 1000 simulations; results populate the outputtrends list
 outputtrends =[]
 for y in range(1000):
 # Infectivity and susceptibility parameters from: 
 # (Pesciaroli et al. 2025: https://doi.org/10.3390/ani15030386)
 # Infectivity parameters of the farms type
+# Farm included in the study Bellini et al. 2025, n=3074. In case of a new dataset, use N = len(mydata)
     mydata['sus'] = numpy.random.beta(90,10, 3074)     # Large swine farms
     mydata['bos'] = numpy.random.beta(45,55, 3074)     # Large cattle farms
     mydata['susmall'] = numpy.random.beta(45,55, 3074) # Small swine farms
     mydata['bosmall'] = numpy.random.beta(25,75, 3074) # Small cattle farms 
 # Infectivity, four levels 
-    mydata['release_lev_if'] = 0.0 # set as int64 righ away 
+    mydata['release_lev_if'] = 0
     mydata.loc[mydata['tipo'] == 2, 'release_lev_if'] = mydata['sus']
     mydata.loc[mydata['tipo'] == 1, 'release_lev_if'] = mydata['bos']
     mydata.loc[mydata['tipo'] == 4, 'release_lev_if'] = mydata['susmall']
@@ -64,9 +63,9 @@ for y in range(1000):
     mydata['expbos'] = numpy.random.beta(90,10, 3074) # Cattle farms 
     mydata['expsus'] = numpy.random.beta(6, 94, 3074) # Swine farms 
 ######## Susceptibility, two levels 
-    mydata['exposure_lev_if'] = 0.0 # set as int64 righ away
-    mydata.loc[mydata['species'] == 2, 'exposure_lev_if'] = mydata['expsus']
-    mydata.loc[mydata['species'] == 1, 'exposure_lev_if'] = mydata['expbos']
+    mydata['exposure_lev_if'] = 0
+    mydata.loc[mydata['species'] == 2, 'exposure_lev_if'] = mydata['expsus'] # 2=swine
+    mydata.loc[mydata['species'] == 1, 'exposure_lev_if'] = mydata['expbos'] # 1=bovine
 #################### Multiply element wise by the kernel matrix #############
 # Ensure these are numpy arrays
     release_lev_if = mydata.release_lev_if.to_numpy()[:, None] # shape (N, 1)
@@ -81,7 +80,7 @@ for y in range(1000):
 # By the following code we obtain a fixed threshold for each of the 1000 simulations
 # in this way, we consider uncertainty in the threshold of the transmission
 # probability of mymatrelexp resulting from kernel distance and farm type   
-    mymat3 = numpy.where(numpy.random.random(1)[0] < mymatrelexp, 1, 0)  
+    mymat3 = numpy.where(numpy.random.random(1)[0] < mymatrelexp, 1, 0) 
 ####################################################################################################################
 # Build the farm network
 # ----------------------------
@@ -139,3 +138,5 @@ df500removed = pd. DataFrame(outputtrends)
 print(df500removed.head())
 # Results can be exported for further analysis and graphical representation
 df500removed.to_csv('OutPutREMOVED500maxDEGREE1000simul.csv')
+
+# Results can be exported for further analysis and graphical representation
