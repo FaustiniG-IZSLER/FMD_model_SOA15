@@ -23,7 +23,7 @@ If you use this model in your work, please cite the following article:
 _Bellini, S.; Scaburri, A.; Tironi, M.; Cappa, V.; Mannelli, A.; Alborali, G.L. Simulating the Spread of Foot-and-Mouth Disease in Densely Populated Areas as Part of Contingency Plans to Establish the Best Control Options. Pathogens 2025, 14, 933_
 https://doi.org/10.3390/pathogens14090933
 
-To cite this github page, please use the following DOI: [![DOI](https://zenodo.org/badge/1109826844.svg)](https://doi.org/10.5281/zenodo.17979632)
+To cite this github page, please use the following DOI: 10.5281/zenodo.17979632 . 
 
 ---
 
