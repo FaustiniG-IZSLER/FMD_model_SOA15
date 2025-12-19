@@ -22,7 +22,7 @@ from scipy.spatial.distance import cdist   # SciPy library
 
 mydata = pd.read_csv("database.csv", header = 0)
 len(mydata)
-
+mydata.head()
 #Extract coordinates as a NumPy array
 
 coords = mydata[['X', 'Y']].to_numpy()
@@ -53,7 +53,7 @@ for y in range(1000):
     mydata['susmall'] = numpy.random.beta(45,55, 3074) # Small swine farms
     mydata['bosmall'] = numpy.random.beta(25,75, 3074) # Small cattle farms 
 # Infectivity, four levels 
-    mydata['release_lev_if'] = 0
+    mydata['release_lev_if'] = 0.0 # set as int64 right away 
     mydata.loc[mydata['tipo'] == 2, 'release_lev_if'] = mydata['sus']
     mydata.loc[mydata['tipo'] == 1, 'release_lev_if'] = mydata['bos']
     mydata.loc[mydata['tipo'] == 4, 'release_lev_if'] = mydata['susmall']
@@ -63,7 +63,7 @@ for y in range(1000):
     mydata['expbos'] = numpy.random.beta(90,10, 3074) # Cattle farms 
     mydata['expsus'] = numpy.random.beta(6, 94, 3074) # Swine farms 
 ######## Susceptibility, two levels 
-    mydata['exposure_lev_if'] = 0
+    mydata['exposure_lev_if'] = 0.0 # set as int64 right away 
     mydata.loc[mydata['species'] == 2, 'exposure_lev_if'] = mydata['expsus'] # 2=swine
     mydata.loc[mydata['species'] == 1, 'exposure_lev_if'] = mydata['expbos'] # 1=bovine
 #################### Multiply element wise by the kernel matrix #############
@@ -96,7 +96,7 @@ for y in range(1000):
 # Populate the list  
     for i in range(0,500):
         top500names[i] = top500[i][0]
-# Remove 1500 herds (nodes) with maximum degree 
+# Remove 500 herds (nodes) with maximum degree 
     g2=G.copy()
     g2.remove_nodes_from(top500names)
 # Identify the index case as the node with maximum degree among the remained herds, in g2  
